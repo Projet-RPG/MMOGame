@@ -1,0 +1,85 @@
+[gd_scene format=3 uid="uid://cfbdsbr58yxsc"]
+
+[ext_resource type="Script" uid="uid://cfqlmr83qf3k" path="res://scripts/ui/character_select.gd" id="1_ci853"]
+
+[node name="CharacterSelect" type="Node2D" unique_id=501418944]
+
+[node name="CharacterSelect" type="Control" parent="." unique_id=1042924786]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ci853")
+
+[node name="LabelWelcome" type="Label" parent="CharacterSelect" unique_id=693273335]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CharacterSelect" unique_id=1328155899]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 640.0
+offset_top = 360.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Slot1" type="HBoxContainer" parent="CharacterSelect/HBoxContainer" unique_id=367637914]
+layout_mode = 2
+
+[node name="LabelSlot1" type="Label" parent="CharacterSelect/HBoxContainer/Slot1" unique_id=1991989692]
+layout_mode = 2
+horizontal_alignment = 1
+
+[node name="BtnSlot1" type="Button" parent="CharacterSelect/HBoxContainer/Slot1" unique_id=394952117]
+layout_mode = 2
+
+[node name="Slot2" type="HBoxContainer" parent="CharacterSelect/HBoxContainer" unique_id=1828502119]
+layout_mode = 2
+
+[node name="LabelSlot2" type="Label" parent="CharacterSelect/HBoxContainer/Slot2" unique_id=316722635]
+layout_mode = 2
+horizontal_alignment = 1
+
+[node name="BtnSlot2" type="Button" parent="CharacterSelect/HBoxContainer/Slot2" unique_id=2058860557]
+layout_mode = 2
+
+[node name="Slot3" type="HBoxContainer" parent="CharacterSelect/HBoxContainer" unique_id=759686216]
+layout_mode = 2
+
+[node name="LabelSlot3" type="Label" parent="CharacterSelect/HBoxContainer/Slot3" unique_id=824373275]
+layout_mode = 2
+horizontal_alignment = 1
+
+[node name="BtnSlot3" type="Button" parent="CharacterSelect/HBoxContainer/Slot3" unique_id=1605949742]
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CharacterSelect" unique_id=1564861717]
+layout_mode = 1
+anchors_preset = -1
+offset_left = 220.0
+offset_top = 220.0
+
+[node name="BtnPlay" type="Button" parent="CharacterSelect/HBoxContainer2" unique_id=192204674]
+layout_mode = 2
+text = "Jouer"
+
+[node name="BtnCreate" type="Button" parent="CharacterSelect/HBoxContainer2" unique_id=302019752]
+layout_mode = 2
+text = "Créer"
+
+[node name="BtnDelete" type="Button" parent="CharacterSelect/HBoxContainer2" unique_id=396167523]
+layout_mode = 2
+text = "Supprimer"
+
+[node name="LabelError" type="Label" parent="CharacterSelect" unique_id=382466416]
+layout_mode = 1
+anchors_preset = -1
+offset_left = 200.0
+offset_top = 50.0

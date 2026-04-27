@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://3yxvq4ma3kdi"]
+
+[ext_resource type="Script" uid="uid://yrs512j2b6e4" path="res://scripts/ui/login.gd" id="1_ec7l3"]
+
+[node name="Login" type="Node2D" unique_id=228810074]
+
+[node name="Login" type="Control" parent="." unique_id=564949420]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ec7l3")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Login" unique_id=235684174]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 635.0
+offset_top = 360.0
+grow_horizontal = 2
+grow_vertical = 2
+localize_numeral_system = false
+alignment = 1
+
+[node name="LabelLogin" type="Label" parent="Login/VBoxContainer" unique_id=1648684153]
+layout_mode = 2
+text = "Connexion :"
+
+[node name="InputUsername" type="LineEdit" parent="Login/VBoxContainer" unique_id=1633653105]
+layout_mode = 2
+text = "victor"
+placeholder_text = "Nom d'utilisateur"
+
+[node name="InputPassword" type="LineEdit" parent="Login/VBoxContainer" unique_id=568183499]
+layout_mode = 2
+text = "1234"
+placeholder_text = "Mot de passe"
+secret = true
+
+[node name="BtnLogin" type="Button" parent="Login/VBoxContainer" unique_id=690214321]
+layout_mode = 2
+text = "Se connecter"
+
+[node name="BtnRegister" type="Button" parent="Login/VBoxContainer" unique_id=1690854306]
+layout_mode = 2
+text = "Créer un compte"
+
+[node name="LabelError" type="Label" parent="Login/VBoxContainer" unique_id=1408722159]
+layout_mode = 2

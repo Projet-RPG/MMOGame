@@ -1,0 +1,84 @@
+[gd_scene format=3 uid="uid://3yxvq4ma3kdi"]
+
+[ext_resource type="Script" uid="uid://yrs512j2b6e4" path="res://scripts/client/ui/login.gd" id="1_f76nj"]
+[ext_resource type="Texture2D" uid="uid://vgkfsh01sv1w" path="res://assets/ui/logo.png" id="2_070ts"]
+
+[node name="Login" type="Control" unique_id=1422332441]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_f76nj")
+
+[node name="Background" type="ColorRect" parent="." unique_id=731620233]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.039215688, 0.03137255, 0.015686275, 1)
+
+[node name="Full Rect" type="CenterContainer" parent="." unique_id=741791032]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -224.0
+offset_top = -195.0
+offset_right = 224.0
+offset_bottom = 195.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="PanelContainer" parent="Full Rect" unique_id=512594969]
+custom_minimum_size = Vector2(320, 0)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Full Rect/Panel" unique_id=1109606816]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Full Rect/Panel/MarginContainer" unique_id=1934854313]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Logo" type="TextureRect" parent="Full Rect/Panel/MarginContainer/VBoxContainer" unique_id=828896889]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+texture = ExtResource("2_070ts")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="LabelLogin" type="Label" parent="Full Rect/Panel/MarginContainer/VBoxContainer" unique_id=431049837]
+layout_mode = 2
+
+[node name="InputUsername" type="LineEdit" parent="Full Rect/Panel/MarginContainer/VBoxContainer" unique_id=1947032591]
+layout_mode = 2
+text = "victor"
+placeholder_text = "Nom d'utilisateur"
+
+[node name="InputPassword" type="LineEdit" parent="Full Rect/Panel/MarginContainer/VBoxContainer" unique_id=2059140527]
+layout_mode = 2
+text = "1234"
+placeholder_text = "Mot de passe"
+secret = true
+secret_character = "*"
+
+[node name="BtnLogin" type="Button" parent="Full Rect/Panel/MarginContainer/VBoxContainer" unique_id=965733477]
+layout_mode = 2
+text = "Se connecter"
+
+[node name="BtnRegister" type="Button" parent="Full Rect/Panel/MarginContainer/VBoxContainer" unique_id=260326496]
+layout_mode = 2
+text = "Créer un compte"
+
+[node name="LabelError" type="Label" parent="Full Rect/Panel/MarginContainer/VBoxContainer" unique_id=1571336973]
+layout_mode = 2

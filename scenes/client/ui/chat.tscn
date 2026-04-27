@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://cjxuk1mkm6ptn"]
+
+[ext_resource type="Script" path="res://scripts/ui/chat.gd" id="1_6bdm3"]
+
+[node name="Chat" type="CanvasLayer" unique_id=1648261276]
+script = ExtResource("1_6bdm3")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=917924955]
+custom_minimum_size = Vector2(280, 180)
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = -230.0
+offset_right = 300.0
+offset_bottom = -50.0
+grow_vertical = 0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer" unique_id=1660812759]
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+
+[node name="Messages" type="VBoxContainer" parent="VBoxContainer/ScrollContainer" unique_id=2068344859]
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=36771494]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+
+[node name="InputMessage" type="LineEdit" parent="VBoxContainer/HBoxContainer" unique_id=266543850]
+layout_mode = 2
+placeholder_text = "Message..."
+
+[node name="BtnSend" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=1017848819]
+layout_mode = 2
+text = "Envoyer"

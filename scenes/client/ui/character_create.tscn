@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://dyr0emkqe06px"]
+
+[ext_resource type="Script" uid="uid://ci0va85u0sr7v" path="res://scripts/client/ui/character_create.gd" id="1_7fbtr"]
+
+[node name="CharacterCreate" type="Node2D" unique_id=1247025649]
+
+[node name="CharacterCreate" type="Control" parent="." unique_id=1863712861]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_7fbtr")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CharacterCreate" unique_id=914183950]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="CharacterCreate/VBoxContainer" unique_id=416024213]
+layout_mode = 2
+text = "Créer un personnage"
+
+[node name="InputName" type="LineEdit" parent="CharacterCreate/VBoxContainer" unique_id=455379178]
+layout_mode = 2
+placeholder_text = "Nom du personnage"
+
+[node name="LabelChooseClass" type="Label" parent="CharacterCreate/VBoxContainer" unique_id=2033236788]
+layout_mode = 2
+text = "Choisir une classe"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CharacterCreate/VBoxContainer" unique_id=703798654]
+layout_mode = 2
+
+[node name="BtnGuerriero" type="Button" parent="CharacterCreate/VBoxContainer/HBoxContainer" unique_id=419732409]
+layout_mode = 2
+text = "Guerrier"
+
+[node name="BtnMage" type="Button" parent="CharacterCreate/VBoxContainer/HBoxContainer" unique_id=431404015]
+layout_mode = 2
+text = "Mage"
+
+[node name="BtnArcher" type="Button" parent="CharacterCreate/VBoxContainer/HBoxContainer" unique_id=1969684088]
+layout_mode = 2
+text = "Archer"
+
+[node name="LabelClass" type="Label" parent="CharacterCreate/VBoxContainer" unique_id=518730135]
+layout_mode = 2
+text = "Aucune classe sélectionnée"
+
+[node name="LabelStats" type="Label" parent="CharacterCreate/VBoxContainer" unique_id=1051023642]
+layout_mode = 2
+
+[node name="BtnConfirm" type="Button" parent="CharacterCreate/VBoxContainer" unique_id=186000456]
+layout_mode = 2
+text = "Créer"
+
+[node name="LabelError" type="Label" parent="CharacterCreate/VBoxContainer" unique_id=651785369]
+layout_mode = 2
