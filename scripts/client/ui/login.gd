@@ -214,8 +214,8 @@ func _on_login_response(_result, _code, _headers, body) -> void:
 		return
 	GameState.account_id = json["account_id"]
 	GameState.username = input_username.text.strip_edges()
-	ResourceLoader.load_threaded_request("res://scenes/world.tscn")
-	get_tree().change_scene_to_file("res://client/scenes/ui/character_create.tscn")
+	ResourceLoader.load_threaded_request("res://scenes/client/world.tscn")
+	get_tree().change_scene_to_file("res://scenes/client/ui/character_select.tscn")
 
 
 func _on_register() -> void:

@@ -25,15 +25,15 @@ func _ready() -> void:
 	btn_confirm.pressed.connect(_on_confirm)
 
 
-func _select_class(class_name: String) -> void:
-	selected_class = class_name
-	label_class.text = "Classe : " + class_name
-	var s := CLASS_STATS[class_name]
+func _select_class(cls: String) -> void:
+	selected_class = cls
+	label_class.text = "Classe : " + cls
+	var s : Dictionary = CLASS_STATS[cls]
 	label_stats.text = "HP : %d | Force : %d | Intelligence : %d" % [s["hp"], s["strength"], s["intelligence"]]
 
 
 func _on_confirm() -> void:
-	var char_name := input_name.text.strip_edges()
+	var char_name : String = input_name.text.strip_edges()
 	if char_name == "":
 		label_error.text = "Entre un nom !"
 		return
@@ -61,7 +61,7 @@ func _on_confirm() -> void:
 
 func _on_created(_r, _c, _h, body) -> void:
 	btn_confirm.disabled = false
-	var json := JSON.parse_string(body.get_string_from_utf8())
+	var json : Variant = JSON.parse_string(body.get_string_from_utf8())
 	if json == null:
 		label_error.text = "Erreur serveur"
 		return

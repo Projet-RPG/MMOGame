@@ -11,12 +11,14 @@ config_version=5
 [application]
 
 config/name="MovidoranMMO"
-run/main_scene="uid://cs5fdy2sm1dbo"
+config/version="1.0"
+run/main_scene="uid://cyifys6bbuxdt"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 
 [autoload]
 
 GameState="*uid://dfbqmu2nim82j"
+NetworkClient="*uid://dp063bjytnwtc"
 
 [display]
 

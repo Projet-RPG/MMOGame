@@ -93,7 +93,7 @@ func _on_play() -> void:
 	_set_buttons_enabled(false)
 	_do_request(API_SET_ONLINE,
 		{"account_id": GameState.account_id, "slot": selected_slot, "online": 1},
-		func(_r, _c, _h, _b): get_tree().change_scene_to_file("res://scenes/world.tscn")
+		func(_r, _c, _h, _b): get_tree().change_scene_to_file("res://scenes/client/world.tscn")
 	)
 
 

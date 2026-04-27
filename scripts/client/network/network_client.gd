@@ -2,7 +2,7 @@ extends Node
 
 const SERVER_IP := "127.0.0.1"
 const SERVER_PORT := 7777
-const PLAYER_SCENE := preload("res://scenes/player.tscn")
+const PLAYER_SCENE := preload("res://scenes/client/player.tscn")
 const API_ONLINE_URL := "http://localhost/mmo_api/set_online.php"
 
 var connected := false

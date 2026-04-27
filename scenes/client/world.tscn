@@ -1,12 +1,12 @@
 [gd_scene format=4 uid="uid://dfwhkix7s1jpo"]
 
 [ext_resource type="Script" uid="uid://clmigxgv3va5t" path="res://scripts/client/world/world.gd" id="1_qx6fs"]
-[ext_resource type="PackedScene" path="res://scenes/ui/chat.tscn" id="2_7r4gi"]
+[ext_resource type="PackedScene" uid="uid://cjxuk1mkm6ptn" path="res://scenes/client/ui/chat.tscn" id="2_7r4gi"]
 [ext_resource type="PackedScene" uid="uid://dpux7mjnmklvb" path="res://scenes/client/player.tscn" id="3_3qq62"]
 [ext_resource type="Texture2D" uid="uid://oho4de71a6nk" path="res://assets/tilesets/collection/objects.png" id="3_i7141"]
 [ext_resource type="TileSet" uid="uid://cb5ukn6tw7oqi" path="res://plains.tres" id="4_4mrxx"]
 [ext_resource type="Texture2D" uid="uid://5qusaf7gxyuy" path="res://assets/tilesets/collection/decor_16x16.png" id="4_i7141"]
-[ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="4_k0juu"]
+[ext_resource type="PackedScene" uid="uid://bwhy6ewiioxjg" path="res://scenes/client/ui/hud.tscn" id="4_k0juu"]
 [ext_resource type="Texture2D" uid="uid://cumol7mha3ll8" path="res://assets/tilesets/collection/grass.png" id="5_4mrxx"]
 [ext_resource type="Texture2D" uid="uid://uwvsuyspqvsi" path="res://assets/tilesets/collection/plains.png" id="6_7r4gi"]
 
