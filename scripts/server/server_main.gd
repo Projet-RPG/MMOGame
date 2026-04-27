@@ -15,49 +15,88 @@ func _ready() -> void:
 	multiplayer.multiplayer_peer = peer
 	multiplayer.peer_connected.connect(_on_peer_connected)
 	multiplayer.peer_disconnected.connect(_on_peer_disconnected)
-	print("╔══════════════════════════════╗")
-	print("║  ⚡ Serveur démarré !         ║")
-	print("║  Port    : ", PORT, "              ║")
-	print("║  MaxConn : ", MAX_CLIENTS, "            ║")
-	print("╚══════════════════════════════╝")
+	print("Serveur démarré ! Port : ", PORT)
 
 func _on_peer_connected(id: int) -> void:
-	players[id] = {
-		"pos": Vector2.ZERO,
-		"character_id": 0,
-		"username": "",
-		"anim": "idle_down",
-		"flip": false
-	}
-	print("┌─────────────────────────────┐")
-	print("│ ✓ Joueur connecté !          │")
-	print("│   peer_id : ", id)
-	print("│   Total   : ", players.size(), " joueur(s)")
-	print("└─────────────────────────────┘")
+	players[id] = {"pos": Vector2.ZERO, "character_id": 0, "username": "", "anim": "idle_down", "flip": false}
+	print("Joueur connecté : ", id, " | Total : ", players.size())
 
 func _on_peer_disconnected(id: int) -> void:
 	if not players.has(id):
 		return
-	print("┌─────────────────────────────┐")
-	print("│ ✗ Joueur déconnecté !        │")
-	print("│   peer_id : ", id)
-	print("└─────────────────────────────┘")
 	var data: Dictionary = players[id]
 	if data["character_id"] != 0:
 		_save_position(data)
-	var network_client := get_node_or_null("/root/NetworkClient")
-	if network_client != null:
-		for peer_id in players:
-			if peer_id != id:
-				network_client.remove_player.rpc_id(peer_id, id)
+	for peer_id in players:
+		if peer_id != id:
+			remove_player.rpc_id(peer_id, id)
 	players.erase(id)
-	print("  → Joueurs restants : ", players.size())
+	print("Joueur déconnecté : ", id, " | Restants : ", players.size())
+
+@rpc("any_peer", "reliable")
+func send_character_id(character_id: int) -> void:
+	var sender := multiplayer.get_remote_sender_id()
+	if not players.has(sender):
+		return
+	for peer_id in players:
+		if peer_id != sender and players[peer_id]["character_id"] == character_id:
+			character_already_connected.rpc_id(sender)
+			return
+	players[sender]["character_id"] = character_id
+	character_id_confirmed.rpc_id(sender)
+	print("Character ID ", character_id, " assigné à peer ", sender)
+
+@rpc("any_peer", "unreliable_ordered")
+func receive_position(pos: Vector2, username: String, anim: String, flip: bool) -> void:
+	var sender := multiplayer.get_remote_sender_id()
+	if not players.has(sender):
+		return
+	players[sender]["pos"] = pos
+	players[sender]["username"] = username
+	players[sender]["anim"] = anim
+	players[sender]["flip"] = flip
+	for peer_id in players:
+		if peer_id != sender:
+			receive_position_from.rpc_id(peer_id, sender, pos, username, anim, flip)
+
+@rpc("any_peer", "reliable")
+func request_players() -> void:
+	var sender := multiplayer.get_remote_sender_id()
+	for peer_id in players:
+		if peer_id != sender and players[peer_id]["username"] != "":
+			var d: Dictionary = players[peer_id]
+			receive_position_from.rpc_id(sender, peer_id, d["pos"], d["username"], d["anim"], d["flip"])
+
+@rpc("any_peer", "reliable")
+func receive_chat(username: String, text: String) -> void:
+	for peer_id in players:
+		receive_chat_from.rpc_id(peer_id, username, text)
+
+@rpc("any_peer", "reliable")
+func receive_position_from(_sender_id: int, _pos: Vector2, _username: String, _anim: String, _flip: bool) -> void:
+	pass
+
+@rpc("any_peer", "reliable")
+func receive_chat_from(_username: String, _text: String) -> void:
+	pass
+
+@rpc("any_peer", "reliable")
+func character_id_confirmed() -> void:
+	pass
+
+@rpc("any_peer", "reliable")
+func character_already_connected() -> void:
+	pass
+
+@rpc("any_peer", "reliable")
+func remove_player(_peer_id: int) -> void:
+	pass
 
 func _save_position(data: Dictionary) -> void:
 	var http := HTTPRequest.new()
 	add_child(http)
-	http.request_completed.connect(func(_result, _code, _headers, body):
-		print("  → Position sauvegardée : ", body.get_string_from_utf8())
+	http.request_completed.connect(func(_r, _c, _h, body):
+		print("Position sauvegardée : ", body.get_string_from_utf8())
 		http.queue_free()
 	)
 	var body := JSON.stringify({
@@ -67,7 +106,7 @@ func _save_position(data: Dictionary) -> void:
 	})
 	var err := http.request(API_SAVE_URL, ["Content-Type: application/json"], HTTPClient.METHOD_POST, body)
 	if err != OK:
-		push_error("Échec de la requête save_position : %d" % err)
+		push_error("Echec save_position : %d" % err)
 		http.queue_free()
 
 func get_connected_character_ids() -> Array:
