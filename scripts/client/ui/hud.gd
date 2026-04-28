@@ -1,7 +1,7 @@
 extends CanvasLayer
 
-@onready var bar_hp := $VBoxContainer/HBoxContainer/BarHP
-@onready var label_hp := $VBoxContainer/HBoxContainer/LabelHP
+@onready var bar_hp := $HP/HBoxContainer/BarHP
+@onready var label_hp := $HP/HBoxContainer/LabelHP
 
 func _ready() -> void:
 	bar_hp.min_value = 0

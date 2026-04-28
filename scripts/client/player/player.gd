@@ -129,7 +129,6 @@ func _save_position() -> void:
 	var http := HTTPRequest.new()
 	add_child(http)
 	http.request_completed.connect(func(_r, _c, _h, body):
-		print("Position sauvegardée : ", body.get_string_from_utf8())
 		http.queue_free()
 	)
 	var body := JSON.stringify({
