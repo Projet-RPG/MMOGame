@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dpux7mjnmklvb"]
 
-[ext_resource type="Script" path="res://scripts/player/player.gd" id="1_4flbx"]
+[ext_resource type="Script" uid="uid://huerelevjkvf" path="res://scripts/client/player/player.gd" id="1_4flbx"]
 [ext_resource type="Texture2D" uid="uid://b4p7yn6dot8oy" path="res://assets/sprites/characters/player.png" id="2_g2els"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sh265"]
@@ -270,7 +270,7 @@ zoom = Vector2(2, 2)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=287110438]
 sprite_frames = SubResource("SpriteFrames_g2els")
-animation = &"idle_up_right"
+animation = &"walk_right"
 
 [node name="LabelName" type="Label" parent="." unique_id=1512838966]
 anchors_preset = -1

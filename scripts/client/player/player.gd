@@ -32,7 +32,6 @@ var _save_timer := 0.0
 var _last_anim := ""
 var _idle_dir := Vector2(0, 1)
 
-
 func _ready() -> void:
 	$AnimatedSprite2D.play("idle_down")
 	if not is_local:
@@ -43,12 +42,10 @@ func _ready() -> void:
 		character.hp = character.max_hp
 	call_deferred("_update_hud")
 
-
 func _update_hud() -> void:
 	var hud := get_node_or_null("/root/World/HUD")
 	if hud != null:
 		hud.update_hp(character.hp, character.max_hp)
-
 
 func _get_input_dir() -> Vector2:
 	var dir := Vector2.ZERO
@@ -62,7 +59,6 @@ func _get_input_dir() -> Vector2:
 		dir.y += 1
 	return dir
 
-
 func _physics_process(delta: float) -> void:
 	var chat := get_node_or_null("/root/World/Chat")
 	if chat != null and chat.is_input_open():
@@ -72,13 +68,9 @@ func _physics_process(delta: float) -> void:
 
 	var dir := _get_input_dir()
 
-	# _idle_dir = dernière direction non-nulle des touches encore appuyées
-	# Si on appuie sur une touche, on met à jour
-	# Si on relâche une touche, on recalcule depuis ce qui reste appuyé
 	if dir != Vector2.ZERO:
 		_idle_dir = Vector2(sign(dir.x), sign(dir.y))
 	else:
-		# Recalcule depuis les touches encore enfoncées individuellement
 		var remaining := Vector2.ZERO
 		if Input.is_key_pressed(KEY_Q) or Input.is_key_pressed(KEY_LEFT):
 			remaining.x -= 1
@@ -100,10 +92,11 @@ func _physics_process(delta: float) -> void:
 		_save_timer = 0.0
 		_save_position()
 
-	var net := get_node_or_null("/root/NetworkClient")
-	if net != null:
-		net.send_position(global_position, $AnimatedSprite2D.animation, $AnimatedSprite2D.flip_h)
-
+	NetworkManager.send_move(
+		global_position,
+		$AnimatedSprite2D.animation,
+		$AnimatedSprite2D.flip_h
+	)
 
 func _update_animation(dir: Vector2) -> void:
 	var anim: String
@@ -117,11 +110,9 @@ func _update_animation(dir: Vector2) -> void:
 		$AnimatedSprite2D.flip_h = false
 		_last_anim = anim
 
-
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:
 		_save_position()
-
 
 func _save_position() -> void:
 	if not is_local or GameState.current_character == null:

@@ -1,24 +1,23 @@
-extends CanvasLayer
+extends VBoxContainer
 
 const MESSAGE_LIFETIME := 10.0
 const FADE_DURATION := 1.0
 const MAX_MESSAGES := 20
 
-@onready var messages := $VBoxContainer/ScrollContainer/Messages
-@onready var input_message := $VBoxContainer/HBoxContainer/InputMessage
-@onready var input_container := $VBoxContainer/HBoxContainer
-@onready var scroll := $VBoxContainer/ScrollContainer
+@onready var messages := $ScrollContainer/Messages
+@onready var input_message := $HBoxContainer/InputMessage
+@onready var input_container := $HBoxContainer
+@onready var scroll := $ScrollContainer
 
 var _fade_timer := 0.0
 var _is_fading := false
 var _chat_visible := true
 
-
 func _ready() -> void:
-	$VBoxContainer/HBoxContainer/BtnSend.pressed.connect(_on_send)
+	$HBoxContainer/BtnSend.pressed.connect(_on_send)
 	input_message.text_submitted.connect(_on_text_submitted)
 	input_container.visible = false
-
+	NetworkManager.on_chat_received.connect(add_message)
 
 func _process(delta: float) -> void:
 	if input_container.visible or not _chat_visible:
@@ -32,7 +31,6 @@ func _process(delta: float) -> void:
 			_is_fading = false
 			_chat_visible = false
 
-
 func _input(event: InputEvent) -> void:
 	if not event is InputEventKey or not event.pressed:
 		return
@@ -45,10 +43,8 @@ func _input(event: InputEvent) -> void:
 		input_container.visible = false
 		_fade_timer = MESSAGE_LIFETIME
 
-
 func is_input_open() -> bool:
 	return input_container.visible
-
 
 func add_message(username: String, text: String) -> void:
 	var label := Label.new()
@@ -65,7 +61,6 @@ func add_message(username: String, text: String) -> void:
 	await get_tree().process_frame
 	scroll.scroll_vertical = 999999
 
-
 func _on_text_submitted(_text: String) -> void:
 	_send_message()
 
@@ -79,10 +74,7 @@ func _send_message() -> void:
 	if text == "":
 		return
 	input_message.text = ""
-	var net := get_node_or_null("/root/NetworkClient")
-	if net != null:
-		net.send_chat_message(text)
-
+	NetworkManager.send_chat_message(text)
 
 func _reset_visibility() -> void:
 	_is_fading = false
